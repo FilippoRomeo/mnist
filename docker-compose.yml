@@ -1,0 +1,16 @@
+version: '3.8'
+
+services:
+  app:
+    build: .
+    ports:
+      - "8501:8501"
+    environment:
+      DATABASE_URL: "postgresql://mnist_db_user:U35qRgbFmLE75WzUiEacGKcWLXM2xlza@dpg-cvcprklrie7s73ae38pg-a.oregon-postgres.render.com/mnist_db?sslmode=require"
+    depends_on:
+      - db
+    volumes:
+      - mnist_model:/app/mnist_model.pth
+
+volumes:
+  mnist_model:

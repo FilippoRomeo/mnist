@@ -1,0 +1,25 @@
+# Ignore Python virtual environment
+venv/
+.env/
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+*.db
+*.sqlite3
+
+# Ignore Docker-related files
+docker-compose.override.yml
+
+# Ignore sensitive files
+.env
+*.pem
+*.key
+*.crt
+
+# Ignore IDE-specific files
+.vscode/
+.idea/
+
+# Ignore model files (if large)
+mnist_model.pth
