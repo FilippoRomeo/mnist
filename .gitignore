@@ -20,6 +20,3 @@ docker-compose.override.yml
 # Ignore IDE-specific files
 .vscode/
 .idea/
-
-# Ignore model files (if large)
-mnist_model.pth
