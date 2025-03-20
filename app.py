@@ -13,19 +13,24 @@ from train import MNISTModel,train_on_mnist, save_model, device, MODEL_PATH, ret
 # Database connection function
 torch.classes.__path__ = [os.path.join(torch.__path__[0], torch.classes.__file__)]
 
-def connect_db():
-    try:
-        conn = psycopg2.connect(
-            host=os.getenv("DB_HOST", "localhost"),
-            database=os.getenv("DB_NAME", "mnist_db"),
-            user=os.getenv("DB_USER", "filipporomeo"),
-            password=os.getenv("DB_PASSWORD", "Macbookpro0-")
-        )
-        return conn
-    except Exception as e:
-        st.error(f"❌ Database connection error: {e}")
-        return None
-
+def connect_db(retries=5, delay=3):
+    for attempt in range(retries):
+        try:
+            conn = psycopg2.connect(
+                host=os.getenv("DB_HOST", "localhost"),
+                database=os.getenv("DB_NAME"),
+                user=os.getenv("DB_USER"),
+                password=os.getenv("DB_PASSWORD"),
+                port="5432"
+            )
+            return conn
+        except psycopg2.OperationalError as e:
+            if "could not translate host name" in str(e):
+                st.error(f"❌ DNS resolution failed (attempt {attempt+1}/{retries})")
+            else:
+                st.error(f"❌ Connection failed (attempt {attempt+1}/{retries}): {e}")
+            time.sleep(delay)
+    return None
 # Load model
 if "model" not in st.session_state:
     st.session_state.model = MNISTModel().to(device)

@@ -1,16 +1,45 @@
 version: '3.8'
 
 services:
+  db:
+    image: postgres:15
+    container_name: mnist-db
+    environment:
+      POSTGRES_DB: ${DB_NAME}
+      POSTGRES_USER: ${DB_USER}
+      POSTGRES_PASSWORD: ${DB_PASSWORD}
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+      - ./init.sql:/docker-entrypoint-initdb.d/init.sql
+    networks:
+      - mnist-net
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${DB_USER} -d ${DB_NAME}"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
   app:
     build: .
+    container_name: mnist-app
     ports:
       - "8501:8501"
     environment:
-      DATABASE_URL: "postgresql://mnist_db_user:U35qRgbFmLE75WzUiEacGKcWLXM2xlza@dpg-cvcprklrie7s73ae38pg-a.oregon-postgres.render.com/mnist_db?sslmode=require"
+      - DB_HOST=db
+      - DB_NAME=${DB_NAME}
+      - DB_USER=${DB_USER}
+      - DB_PASSWORD=${DB_PASSWORD}
     depends_on:
-      - db
-    volumes:
-      - mnist_model:/app/mnist_model.pth
+      db:
+        condition: service_healthy
+    networks:
+      - mnist-net
 
 volumes:
-  mnist_model:
+  postgres_data:
+
+networks:
+  mnist-net:
+    driver: bridge
