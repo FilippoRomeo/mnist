@@ -1,23 +1,25 @@
-# Overview
+# MNIST Digit Classification App
 
-This project is an end-to-end MNIST digit classification application designed for deployment on a self-managed server. It involves training a PyTorch model, creating an interactive front-end with Streamlit, logging predictions to a PostgreSQL database, and deploying the application using Docker and Docker Compose. Additionally, the model can be fine-tuned based on user feedback to improve accuracy. The development environment uses Conda for managing dependencies.
+## Overview
+
+This project is an end-to-end MNIST digit classification application designed for deployment on a self-managed server. It involves training a PyTorch model, creating an interactive front-end with Streamlit, logging predictions to a PostgreSQL database, and deploying the application using Docker and Docker Compose. Additionally, the model can be fine-tuned based on user feedback to improve accuracy. The development environment is managed using Conda.
 
 ## Features
 
 - **Digit Recognition**: A PyTorch model classifies handwritten digits from the MNIST dataset.
 - **Interactive Web UI**: Users can draw digits in a Streamlit-based web app.
-- **Prediction & Feedback**: The app provides model predictions along with confidence scores, and users can submit correct labels for feedback.
-- **Database Logging**: PostgreSQL stores predictions and feedback.
-- **Retraining**: The model can be fine-tuned incrementally based on user feedback.
-- **Containerization & Deployment**: The entire application is containerized using Docker and deployed on a self-managed server.
+- **Prediction & Feedback**: The app provides model predictions with confidence scores, and users can submit correct labels for feedback.
+- **Database Logging**: PostgreSQL stores predictions and user feedback.
+- **Incremental Retraining**: The model can be fine-tuned based on feedback to improve accuracy.
+- **Containerized Deployment**: The entire application runs inside Docker containers for seamless deployment.
 
 ## Technologies Used
 
 - **Machine Learning**: PyTorch, TensorFlow
 - **Front-End**: Streamlit
 - **Database**: PostgreSQL
-- **Containerization**: Docker, Docker Compose
 - **Virtual Environment**: Conda
+- **Containerization**: Docker, Docker Compose
 
 ## Installation & Setup
 
@@ -79,7 +81,7 @@ Run the database schema initialization script:
 psql -U youruser -d mnist_db -f init.sql
 ```
 
-Alternatively, if using Docker, the database will be set up automatically with the following command.
+Alternatively, if using Docker, the database will be set up automatically when starting the containers.
 
 ### Run the Application with Docker
 
@@ -113,7 +115,7 @@ CREATE TABLE IF NOT EXISTS predictions (
 
 ### Train the Model
 
-You don't need to run the training script because it is automatically executed by app.py, but eventually run:
+The training script is executed automatically by `app.py`. However, you can manually train the model if needed:
 
 ```bash
 python train.py
@@ -128,7 +130,6 @@ To deploy the application on a self-managed server:
 3. Configure environment variables.
 4. Run `docker-compose up --build` to start the app.
 5. Ensure the app is accessible via a public IP or domain.
-
 
 This guide provides all necessary steps to set up and deploy the MNIST classification project efficiently. 🚀
 
