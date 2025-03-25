@@ -113,7 +113,7 @@ CREATE TABLE IF NOT EXISTS predictions (
 
 ### Train the Model
 
-You don't need to run the training script because it is automatically executed by app.py, but to eventually test it run:
+You don't need to run the training script because it is automatically executed by app.py, but eventually run:
 
 ```bash
 python train.py
