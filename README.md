@@ -130,6 +130,3 @@ To deploy the application on a self-managed server:
 3. Configure environment variables.
 4. Run `docker-compose up --build` to start the app.
 5. Ensure the app is accessible via a public IP or domain.
-
-This guide provides all necessary steps to set up and deploy the MNIST classification project efficiently. 🚀
-
