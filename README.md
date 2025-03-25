@@ -81,14 +81,6 @@ psql -U youruser -d mnist_db -f init.sql
 
 Alternatively, if using Docker, the database will be set up automatically with the following command.
 
-### Train the Model
-
-Run the training script:
-
-```bash
-python train.py
-```
-
 ### Run the Application with Docker
 
 Build and start the containers:
@@ -119,6 +111,14 @@ CREATE TABLE IF NOT EXISTS predictions (
 );
 ```
 
+### Train the Model
+
+You don't need to run the training script because it is automatically executed by app.py, but to eventually test it run:
+
+```bash
+python train.py
+```
+
 ## Deployment
 
 To deploy the application on a self-managed server:
@@ -129,134 +129,6 @@ To deploy the application on a self-managed server:
 4. Run `docker-compose up --build` to start the app.
 5. Ensure the app is accessible via a public IP or domain.
 
-## Docker Configuration
-
-**Docker Compose File:**
-
-```yaml
-version: '3.8'
-
-services:
-  db:
-    image: postgres:15
-    container_name: mnist-db
-    environment:
-      POSTGRES_DB: ${DB_NAME}
-      POSTGRES_USER: ${DB_USER}
-      POSTGRES_PASSWORD: ${DB_PASSWORD}
-    ports:
-      - "5432:5432"
-    volumes:
-      - postgres_data:/var/lib/postgresql/data
-      - ./init.sql:/docker-entrypoint-initdb.d/init.sql
-    networks:
-      - mnist-net
-    healthcheck:
-      test: ["CMD-SHELL", "pg_isready -U ${DB_USER} -d ${DB_NAME}"]
-      interval: 5s
-      timeout: 5s
-      retries: 5
-
-  app:
-    build: .
-    container_name: mnist-app
-    ports:
-      - "8501:8501"
-    environment:
-      - DB_HOST=db
-      - DB_NAME=${DB_NAME}
-      - DB_USER=${DB_USER}
-      - DB_PASSWORD=${DB_PASSWORD}
-    depends_on:
-      db:
-        condition: service_healthy
-    networks:
-      - mnist-net
-
-volumes:
-  postgres_data:
-
-networks:
-  mnist-net:
-    driver: bridge
-```
-
-**Dockerfile:**
-
-```dockerfile
-# Use Python 3.12 as the base image
-FROM python:3.12-slim
-
-# Install system dependencies required for OpenCV
-RUN apt-get update && apt-get install -y \
-    libgl1 \
-    libglib2.0-0 \
-    && rm -rf /var/lib/apt/lists/*
-
-# Set the working directory in the container
-WORKDIR /app
-
-# Copy the requirements file into the container
-COPY requirements.txt .
-
-# Install Python dependencies
-RUN pip install --no-cache-dir -r requirements.txt
-
-# Copy the rest of the application code into the container
-COPY . .
-
-# Expose the port that Streamlit runs on
-EXPOSE 8501
-
-# Set the environment variable for Streamlit
-ENV STREAMLIT_SERVER_PORT=8501
-
-# Run the Streamlit app
-CMD ["streamlit", "run", "app.py", "--server.port=8501", "--server.address=0.0.0.0"]
-```
-
-## Requirements File
-
-Below is the list of dependencies used in this project:
-
-```ini
-absl-py==2.1.0
-altair==5.5.0
-astunparse==1.6.3
-attrs==25.1.0
-blinker==1.9.0
-cachetools==5.5.2
-certifi==2025.1.31
-charset-normalizer==3.4.1
-click==8.1.8
-contourpy==1.3.1
-cycler==0.12.1
-filelock==3.17.0
-flatbuffers==25.2.10
-fonttools==4.56.0
-fsspec==2025.3.0
-gast==0.6.0
-gitdb==4.0.12
-GitPython==3.1.44
-google-pasta==0.2.0
-grpcio==1.70.0
-h5py==3.13.0
-idna==3.10
-Jinja2==3.1.6
-jsonschema==4.23.0
-keras==3.9.0
-matplotlib==3.10.1
-numpy==2.0.2
-opencv-python==4.11.0.86
-pandas==2.2.3
-pillow==11.1.0
-psycopg2-binary==2.9.10
-streamlit==1.43.1
-tensorflow==2.18.0
-torch==2.6.0
-torchaudio==2.6.0
-torchvision==0.21.0
-```
 
 This guide provides all necessary steps to set up and deploy the MNIST classification project efficiently. 🚀
 
