@@ -23,6 +23,13 @@ This project is an end-to-end MNIST digit classification application designed fo
 
 ## Installation & Setup
 
+### Clone the Repository
+
+```bash
+git clone https://github.com/FilippoRomeo/mnist.git
+cd mnist
+```
+
 If using Docker, the prerequisites and db will be set up automatically when starting the containers.
 
 ### Run the Application with Docker
@@ -41,13 +48,6 @@ Ensure you have the following installed:
 - Conda (Miniconda or Anaconda)
 - Docker & Docker Compose
 - PostgreSQL
-
-### Clone the Repository
-
-```bash
-git clone https://github.com/FilippoRomeo/mnist.git
-cd mnist
-```
 
 ### Set Up the Conda Environment
 
