@@ -97,7 +97,7 @@ If using Docker, the prerequisites and db will be set up automatically when star
 
     Once the containers are running, open your browser and go to:
 
-    [http://localhost:8501](http://localhost:8501)
+        [http://localhost:8501](http://localhost:8501)
 
 ## Database Schema
 
