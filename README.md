@@ -56,14 +56,14 @@ docker-compose up --build
 
 2. ### Run the application with Conda envirorment 
 
-       - Ensure you have the following installed:
+    - Ensure you have the following installed:
 
         - Python 3.x
         - Conda (Miniconda or Anaconda)
         - Docker & Docker Compose
         - PostgreSQL
 
-- #### Set Up the Conda Environment
+    - #### Set Up the Conda Environment
 
 Create and activate the Conda virtual environment:
 
