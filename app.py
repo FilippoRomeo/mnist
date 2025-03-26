@@ -13,17 +13,6 @@ from train import MNISTModel,train_on_mnist, save_model, device, MODEL_PATH, ret
 # Database connection function
 torch.classes.__path__ = [os.path.join(torch.__path__[0], torch.classes.__file__)]
 
-st.markdown(
-    """
-    <style>
-    .stApp {
-        background-color: #f0f2f6;  /* Light gray background */
-    }
-    </style>
-    """,
-    unsafe_allow_html=True
-)
-
 def connect_db(retries=5, delay=3):
     for attempt in range(retries):
         try:
