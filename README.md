@@ -29,6 +29,20 @@ This project is an end-to-end MNIST digit classification application designed fo
 git clone https://github.com/FilippoRomeo/mnist.git
 cd mnist
 ```
+### Set Up Environment Variables
+
+Create a `.env` file with the following variables:
+
+```bash
+touch .env
+```
+
+```ini
+DB_HOST=localhost
+DB_NAME=mnist_db
+DB_USER=youruser
+DB_PASSWORD=yourpassword
+```
 
 If using Docker, the prerequisites and db will be set up automatically when starting the containers.
 
@@ -65,18 +79,6 @@ Install all required dependencies:
 ```bash
 pip install -r requirements.txt
 ```
-
-#### Set Up Environment Variables
-
-Create a `.env` file with the following variables:
-
-```ini
-DB_HOST=localhost
-DB_NAME=mnist_db
-DB_USER=youruser
-DB_PASSWORD=yourpassword
-```
-
 #### Set Up the PostgreSQL Database
 
 If you are running PostgreSQL locally, create the database:
