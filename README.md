@@ -93,11 +93,29 @@ If using Docker, the prerequisites and db will be set up automatically when star
         psql -U youruser -d mnist_db -f init.sql
         ```
 
-#### Access the Application
+    - #### Run the streamlit application  
 
-    Once the containers are running, open your browser and go to:
+        ```bash
+        streamlit run app.py     
+        ```
 
-        [http://localhost:8501](http://localhost:8501)
+        In cas you having problem in running the streamlit app run 
+
+        ```bash
+        which streamlit
+        ```
+
+        and it will tell you which streamlit is running, if it is outside the conda envirorment run:
+
+        ```bash
+        pip install streamlit
+        ```
+
+- #### Access the Application
+
+    Once you follow step 1. or 2. the app is running, open your browser and go to:
+
+    [http://localhost:8501](http://localhost:8501)
 
 ## Database Schema
 
