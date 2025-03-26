@@ -63,7 +63,7 @@ Ensure you have the following installed:
 - Docker & Docker Compose
 - PostgreSQL
 
-#### Set Up the Conda Environment
+2.1 #### Set Up the Conda Environment
 
 Create and activate the Conda virtual environment:
 
