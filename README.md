@@ -111,7 +111,7 @@ If using Docker, the prerequisites and db will be set up automatically when star
         pip install streamlit
         ```
 
-#### Access the Application
+- #### Access the Application
 
     Once you follow step 1. or 2. the app is running, open your browser and go to:
 
