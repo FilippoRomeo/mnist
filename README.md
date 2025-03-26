@@ -48,11 +48,11 @@ If using Docker, the prerequisites and db will be set up automatically when star
 
 1. ### Run the Application with Docker
 
-Build and start the containers:
+    - ####  Build and start the containers:
 
-```bash
-docker-compose up --build
-```
+        ```bash
+        docker-compose up --build
+        ```
 
 2. ### Run the application with Conda envirorment 
 
