@@ -23,7 +23,17 @@ This project is an end-to-end MNIST digit classification application designed fo
 
 ## Installation & Setup
 
-### Prerequisites
+If using Docker, the prerequisites and db will be set up automatically when starting the containers.
+
+### Run the Application with Docker
+
+Build and start the containers:
+
+```bash
+docker-compose up --build
+```
+
+### Run the application with Conda envirorment 
 
 Ensure you have the following installed:
 
@@ -79,16 +89,6 @@ Run the database schema initialization script:
 
 ```bash
 psql -U youruser -d mnist_db -f init.sql
-```
-
-Alternatively, if using Docker, the database will be set up automatically when starting the containers.
-
-### Run the Application with Docker
-
-Build and start the containers:
-
-```bash
-docker-compose up --build
 ```
 
 ### Access the Application
