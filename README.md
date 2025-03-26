@@ -32,7 +32,7 @@ cd mnist
 
 If using Docker, the prerequisites and db will be set up automatically when starting the containers.
 
-### Run the Application with Docker
+1. ### Run the Application with Docker
 
 Build and start the containers:
 
@@ -40,7 +40,7 @@ Build and start the containers:
 docker-compose up --build
 ```
 
-### Run the application with Conda envirorment 
+2. ### Run the application with Conda envirorment 
 
 Ensure you have the following installed:
 
