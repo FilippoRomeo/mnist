@@ -58,10 +58,10 @@ docker-compose up --build
 
 Ensure you have the following installed:
 
-- Python 3.x
-- Conda (Miniconda or Anaconda)
-- Docker & Docker Compose
-- PostgreSQL
+- - Python 3.x
+- - Conda (Miniconda or Anaconda)
+- - Docker & Docker Compose
+- - PostgreSQL
 
 - #### Set Up the Conda Environment
 
