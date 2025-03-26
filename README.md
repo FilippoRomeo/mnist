@@ -56,7 +56,7 @@ docker-compose up --build
 
 2. ### Run the application with Conda envirorment 
 
-    - Ensure you have the following installed:
+    - #### Ensure you have the following installed:
 
         - Python 3.x
         - Conda (Miniconda or Anaconda)
@@ -65,39 +65,39 @@ docker-compose up --build
 
     - #### Set Up the Conda Environment
 
-Create and activate the Conda virtual environment:
+        Create and activate the Conda virtual environment:
 
-```bash
-conda create --name mnist-env python=3.12
-conda activate mnist-env
-```
+        ```bash
+        conda create --name mnist-env python=3.12
+        conda activate mnist-env
+        ```
 
-- #### Install Dependencies
+    - #### Install Dependencies
 
-Install all required dependencies:
+        Install all required dependencies:
 
-```bash
-pip install -r requirements.txt
-```
-- #### Set Up the PostgreSQL Database
+        ```bash
+        pip install -r requirements.txt
+        ```
+    - #### Set Up the PostgreSQL Database
 
-If you are running PostgreSQL locally, create the database:
+        If you are running PostgreSQL locally, create the database:
 
-```bash
-psql -U youruser -d postgres -c "CREATE DATABASE mnist_db;"
-```
+        ```bash
+        psql -U youruser -d postgres -c "CREATE DATABASE mnist_db;"
+        ```
 
-Run the database schema initialization script:
+        Run the database schema initialization script:
 
-```bash
-psql -U youruser -d mnist_db -f init.sql
-```
+        ```bash
+        psql -U youruser -d mnist_db -f init.sql
+        ```
 
-- #### Access the Application
+    - #### Access the Application
 
-Once the containers are running, open your browser and go to:
+        Once the containers are running, open your browser and go to:
 
-[http://localhost:8501](http://localhost:8501)
+        [http://localhost:8501](http://localhost:8501)
 
 ## Database Schema
 
