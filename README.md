@@ -49,7 +49,7 @@ Ensure you have the following installed:
 - Docker & Docker Compose
 - PostgreSQL
 
-### Set Up the Conda Environment
+#### Set Up the Conda Environment
 
 Create and activate the Conda virtual environment:
 
@@ -58,7 +58,7 @@ conda create --name mnist-env python=3.12
 conda activate mnist-env
 ```
 
-### Install Dependencies
+#### Install Dependencies
 
 Install all required dependencies:
 
@@ -66,7 +66,7 @@ Install all required dependencies:
 pip install -r requirements.txt
 ```
 
-### Set Up Environment Variables
+#### Set Up Environment Variables
 
 Create a `.env` file with the following variables:
 
@@ -77,7 +77,7 @@ DB_USER=youruser
 DB_PASSWORD=yourpassword
 ```
 
-### Set Up the PostgreSQL Database
+#### Set Up the PostgreSQL Database
 
 If you are running PostgreSQL locally, create the database:
 
@@ -91,7 +91,7 @@ Run the database schema initialization script:
 psql -U youruser -d mnist_db -f init.sql
 ```
 
-### Access the Application
+#### Access the Application
 
 Once the containers are running, open your browser and go to:
 
