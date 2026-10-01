@@ -1,41 +1,41 @@
 # MNIST Digit Classification App
 
-## Overview
+An end-to-end handwritten-digit classification project built around PyTorch, Streamlit, PostgreSQL, and Docker. The app lets users draw a digit, inspect the model prediction and confidence, submit corrective feedback, and use stored feedback for later fine-tuning.
 
-This project is an end-to-end MNIST digit classification application designed for deployment on a self-managed server. It involves training a PyTorch model, creating an interactive front-end with Streamlit, logging predictions to a PostgreSQL database, and deploying the application using Docker and Docker Compose. Additionally, the model can be fine-tuned based on user feedback to improve accuracy. The development environment is managed using Conda.
+## What it includes
 
-## Features
+- PyTorch MNIST classifier
+- Streamlit drawing interface
+- Prediction confidence display
+- PostgreSQL logging for predictions and feedback
+- Feedback-driven incremental retraining
+- Docker and Docker Compose deployment
+- Conda-based local development workflow
 
-- **Digit Recognition**: A PyTorch model classifies handwritten digits from the MNIST dataset.
-- **Interactive Web UI**: Users can draw digits in a Streamlit-based web app.
-- **Prediction & Feedback**: The app provides model predictions with confidence scores, and users can submit correct labels for feedback.
-- **Database Logging**: PostgreSQL stores predictions and user feedback.
-- **Incremental Retraining**: The model can be fine-tuned based on feedback to improve accuracy.
-- **Containerized Deployment**: The entire application runs inside Docker containers for seamless deployment.
+## Architecture
 
-## Technologies Used
+```text
+Streamlit UI
+    ↓
+PyTorch model
+    ↓
+Prediction + confidence
+    ↓
+PostgreSQL
+    ↓
+User feedback / later fine-tuning
+```
 
-- **Machine Learning**: PyTorch, TensorFlow
-- **Front-End**: Streamlit
-- **Database**: PostgreSQL
-- **Virtual Environment**: Conda
-- **Containerization**: Docker, Docker Compose
+## Quick start with Docker
 
-## Installation & Setup
-
-### Clone the Repository
+Clone the repository:
 
 ```bash
 git clone https://github.com/FilippoRomeo/mnist.git
 cd mnist
 ```
-### Set Up Environment Variables
 
-Create a `.env` file with the following variables:
-
-```bash
-touch .env
-```
+Create a local `.env` file:
 
 ```ini
 DB_HOST=localhost
@@ -44,82 +44,42 @@ DB_USER=youruser
 DB_PASSWORD=yourpassword
 ```
 
-If using Docker, the prerequisites and db will be set up automatically when starting the containers.
+Then build and start the containers:
 
-1. ### Run the Application with Docker
+```bash
+docker compose up --build
+```
 
-    - ####  Build and start the containers:
+Open the app at:
 
-        ```bash
-        docker-compose up --build
-        ```
+```text
+http://localhost:8501
+```
 
-2. ### Run the application with Conda envirorment 
+## Run locally with Conda
 
-    - #### Ensure you have the following installed:
+```bash
+conda create --name mnist-env python=3.12 -y
+conda activate mnist-env
+pip install -r requirements.txt
+```
 
-        - Python 3.x
-        - Conda (Miniconda or Anaconda)
-        - Docker & Docker Compose
-        - PostgreSQL
+Create the PostgreSQL database and initialise the schema:
 
-    - #### Set Up the Conda Environment
+```bash
+psql -U youruser -d postgres -c "CREATE DATABASE mnist_db;"
+psql -U youruser -d mnist_db -f init.sql
+```
 
-        Create and activate the Conda virtual environment:
+Start Streamlit:
 
-        ```bash
-        conda create --name mnist-env python=3.12
-        conda activate mnist-env
-        ```
+```bash
+streamlit run app.py
+```
 
-    - #### Install Dependencies
+## Database
 
-        Install all required dependencies:
-
-        ```bash
-        pip install -r requirements.txt
-        ```
-    - #### Set Up the PostgreSQL Database
-
-        If you are running PostgreSQL locally, create the database:
-
-        ```bash
-        psql -U youruser -d postgres -c "CREATE DATABASE mnist_db;"
-        ```
-
-        Run the database schema initialization script:
-
-        ```bash
-        psql -U youruser -d mnist_db -f init.sql
-        ```
-
-    - #### Run the streamlit application  
-
-        ```bash
-        streamlit run app.py     
-        ```
-
-        In cas you having problem in running the streamlit app run 
-
-        ```bash
-        which streamlit
-        ```
-
-        and it will tell you which streamlit is running, if it is outside the conda envirorment run:
-
-        ```bash
-        pip install streamlit
-        ```
-
-- #### Access the Application
-
-    Once you follow step 1. or 2. the app is running, open your browser and go to:
-
-    [http://localhost:8501](http://localhost:8501)
-
-## Database Schema
-
-The PostgreSQL database stores predictions and feedback:
+Predictions and feedback are stored in PostgreSQL. The schema tracks the predicted digit, corrected label, image data, timestamps, and whether feedback has been processed for retraining.
 
 ```sql
 CREATE TABLE IF NOT EXISTS predictions (
@@ -133,20 +93,20 @@ CREATE TABLE IF NOT EXISTS predictions (
 );
 ```
 
-### Train the Model
+## Training
 
-The training script is executed automatically by `app.py`. However, you can manually train the model if needed:
+The model can be trained manually with:
 
 ```bash
 python train.py
 ```
 
-## Deployment
+The application can also use accumulated user feedback for incremental fine-tuning.
 
-To deploy the application on a self-managed server:
+## Main stack
 
-1. Set up the server and install Docker.
-2. Clone the repository onto the server.
-3. Configure environment variables.
-4. Run `docker-compose up --build` to start the app.
-5. Ensure the app is accessible via a public IP or domain.
+`Python` `PyTorch` `Streamlit` `PostgreSQL` `Docker` `Docker Compose`
+
+## Purpose
+
+This project explores the full application loop around a small machine-learning model: training, interactive inference, persistence, user correction, and model improvement rather than classification in isolation.
